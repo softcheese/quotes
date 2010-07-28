@@ -4,28 +4,28 @@ require 'sequel'
 require 'cgi'
 
 get '/' do
-  DB = Sequel.connect('sqlite://db/quotes.db')
+  DB = open_database_connection
   @o = request.env['QUERY_STRING'] == 'o'
   @quotes = (@o ? DB[:quotes_o] : DB[:quotes]).order(:id.desc)
   haml :index
 end
 
 get '/id/:id' do
-  DB = Sequel.connect('sqlite://db/quotes.db')
+  DB = open_database_connection
   @o = request.env['QUERY_STRING'] == 'o'
   @quotes = (@o ? DB[:quotes_o] : DB[:quotes]).filter(:id => params[:id])
   haml :index
 end
 
 get '/channel/:channel' do
-  DB = Sequel.connect('sqlite://db/quotes.db')
+  DB = open_database_connection
   @o = request.env['QUERY_STRING'] == 'o'
   @quotes = (@o ? DB[:quotes_o] : DB[:quotes]).filter(:irc_chan => params[:channel])
   haml :index
 end
 
 get '/by/:attrib' do
-  DB = Sequel.connect('sqlite://db/quotes.db')
+  DB = open_database_connection
   @o = request.env['QUERY_STRING'] == 'o'
   @quotes = (@o ? DB[:quotes_o] : DB[:quotes]).filter(:attrib => params[:attrib])
   haml :index
@@ -62,4 +62,8 @@ helpers do
   def html_escape(text)
     Haml::Helpers.html_escape(text)
   end
+end
+
+def open_database_connection
+  Sequel.connect(ENV['DATABASE_URL'] || 'sqlite://db/quotes.db' )
 end
