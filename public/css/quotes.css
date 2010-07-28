@@ -1,0 +1,55 @@
+body {
+  margin: 2em;
+  font-size: smaller;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+div.header {
+  width: 75%;
+  background-color: #ccc;
+}
+
+div.header p {
+  padding: .5em;
+  font-weight: bold;
+  font-family:  "Courier New", Courier, monospace;
+}
+
+div.header p a {
+  color: #00c;
+}
+
+div.quote {
+  width: 75%;
+  background-color: #cf9;
+}
+
+div.quote p {
+  padding: .5em;
+  font-family:  "Courier New", Courier, monospace;
+}
+
+div.quote p a {
+  color: #000;
+}
+
+div.footer {
+  width: 75%;
+  background-color: #ccc;
+}
+
+div.footer p {
+  padding: .5em;
+  font-family:  "Courier New", Courier, monospace;
+}
+
+.plink {
+  float: right;
+}

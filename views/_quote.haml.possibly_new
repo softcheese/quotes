@@ -1,0 +1,17 @@
+%div.quote
+  %p
+    = nl2br(html_escape(this_quote[:quote]))
+    %br/
+    %br/
+    - if !@r_id
+      %span.plink
+        %a(href='/id/#{this_quote[:id]}' title='permanent link to this quote') #
+    - if this_quote[:irc] == 0
+      - if this_quote[:attrib] != nil && this_quote[:attrib] != ''
+        %a(href='/by/#{this_quote[:attrib]}' title="see only this person's quotes")= this_quote[:attrib]
+      - if this_quote[:context] != nil && this_quote[:context] != ''
+        = ', ' + this_quote[:context] + '.'
+      - else
+        = '.'
+    - else
+      From <a href="/channel/#{this_quote[:irc_chan]}" title="see only this channel's quotes">#{this_quote[:irc_chan]}</a>

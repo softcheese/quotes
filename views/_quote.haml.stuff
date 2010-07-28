@@ -1,0 +1,41 @@
+%div.header
+  %p
+    :escaped
+      = quote.quote
+    -#
+      {$quotes[quote].quote|escape:"html"|nl2br}
+      <br /><br />
+        {if $quotes[quote].irc != '1'}
+          {*if isset($quotes[quote].context)*}
+          {if $quotes[quote].context != ''}
+            {if !isset($r_id)}
+      <span class="plink">
+      <a href="{$a_url}id={$quotes[quote].id}" title="permanent link to this quote">#</a>
+      </span>
+            {/if}
+            {*if isset($quotes[quote].attrib)*}
+            {if $quotes[quote].attrib != ''}
+      <a href="{$a_url}attrib={$quotes[quote].attrib|escape:"url"}" title="see only this person's quotes">{$quotes[quote].attrib}</a>,
+            {/if}
+      {$quotes[quote].context}.
+          {else}
+            {if !isset($r_id)}
+      <span class="plink">
+      <a href="{$a_url}id={$quotes[quote].id}" title="permanent link to this quote">#</a>
+      </span>
+            {/if}
+            {*if isset($quotes[quote].attrib)*}
+            {if $quotes[quote].attrib != ''}
+      <a href="{$a_url}attrib={$quotes[quote].attrib|escape:"url"}" title="see only this person's quotes">{$quotes[quote].attrib}</a>
+            {/if}
+          {/if}
+        {else}
+          {if !isset($r_id)}
+      <span class="plink">
+      <a href="{$a_url}id={$quotes[quote].id}" title="permanent link to this quote">#</a>
+      </span>
+          {/if}
+      From <a href="{$a_url}channel={$quotes[quote].irc_chan|escape:"url"}" title="see only this channel's quotes">{$quotes[quote].irc_chan}</a>
+        {/if}
+      </p>
+      </div>

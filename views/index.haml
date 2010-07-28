@@ -1,0 +1,3 @@
+= partial('header')
+- @quotes.each do |q|
+  = partial('quote', :locals => { :this_quote => q })

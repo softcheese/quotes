@@ -1,0 +1,12 @@
+%div.header
+  %p
+    - if @action == 'submit'
+      %span.plink
+        = surround '[', ']' do
+          %a(href='/') home
+      submit a quote
+    - else
+      %span.plink
+        = surround '[', ']' do
+          %a(href='/submit') submit
+      %a(href='/#{(@o ? '?o' : '')}') quotes database#{(@o ? ' (offensive)' : '')}
