@@ -3,41 +3,42 @@ require 'haml'
 require 'sequel'
 require 'cgi'
 
+configure { DB = Sequel.connect(ENV['DATABASE_URL'] || 'sqlite://db/quotes.db') } 
+
+class Quote < Sequel::Model ; end
+class OffensiveQuote < Sequel::Model(:quotes_o) ; end
+
+before do
+  request.path_info.gsub!(/\/o$/) do
+    Quote = OffensiveQuote
+    @o = true
+    "/"
+  end
+end
+
 get '/' do
-  DB = open_database_connection
-  @o = request.env['QUERY_STRING'] == 'o'
-  @quotes = (@o ? DB[:quotes_o] : DB[:quotes]).order(:id.desc)
+  @quotes = Quote.reverse_order(:id)
   haml :index
 end
 
-get '/id/:id' do
-  DB = open_database_connection
-  @o = request.env['QUERY_STRING'] == 'o'
-  @quotes = (@o ? DB[:quotes_o] : DB[:quotes]).filter(:id => params[:id])
+get '/id/:id/?' do
+  @quotes = Quote.filter(:id => params[:id]).all
   haml :index
 end
 
-get '/channel/:channel' do
-  DB = open_database_connection
-  @o = request.env['QUERY_STRING'] == 'o'
-  @quotes = (@o ? DB[:quotes_o] : DB[:quotes]).filter(:irc_chan => params[:channel])
+get '/channel/:irc_chan/?' do
+  @quotes = Quote.filter(:irc_chan => params[:irc_chan]).all
   haml :index
 end
 
-get '/by/:attrib' do
-  DB = open_database_connection
-  @o = request.env['QUERY_STRING'] == 'o'
-  @quotes = (@o ? DB[:quotes_o] : DB[:quotes]).filter(:attrib => params[:attrib])
+get '/by/:attrib/?' do
+  @quotes = Quote.filter(:attrib => params[:attrib]).all
   haml :index
 end
 
 get '/submit' do
   @action = 'submit'
   haml :submit
-end
-
-get '/reqinfo' do
-    request.inspect
 end
 
 helpers do
@@ -62,8 +63,7 @@ helpers do
   def html_escape(text)
     Haml::Helpers.html_escape(text)
   end
+  
+  def o_value ; @o ? "/o" : "" ; end
 end
-
-def open_database_connection
-  Sequel.connect(ENV['DATABASE_URL'] || 'sqlite://db/quotes.db' )
-end
+  

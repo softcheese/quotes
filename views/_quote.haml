@@ -7,18 +7,18 @@
       - if this_quote[:context] != nil
         - if !@r_id
           %span.plink
-            %a(href='/id/#{this_quote[:id]}' title='permanent link to this quote') #
+            %a(href='/id/#{this_quote[:id]}#{o_value}' title='permanent link to this quote') #
         - if this_quote[:attrib] != nil
-          %a(href='/by/#{CGI.escape(this_quote[:attrib])}' title="see only this person's quotes")= this_quote[:attrib] + ','
+          %a(href='/by/#{CGI.escape(this_quote[:attrib])}#{o_value}' title="see only this person's quotes")= this_quote[:attrib] + ','
         = this_quote[:context] + '.'
       - else
         - if !@r_id
           %span.plink
-            %a(href='/id/#{this_quote[:id]}' title='permanent link to this quote') #
+            %a(href='/id/#{this_quote[:id]}#{o_value}' title='permanent link to this quote') #
         - if this_quote[:attrib] != nil
           %a(href='/by/#{CGI.escape(this_quote[:attrib])}' title="see only this person's quotes")= this_quote[:attrib] + ','
     - else
       - if !@r_id
         %span.plink
-          %a(href='/id/#{this_quote[:id]}' title='permanent link to this quote') #
-      From <a href="/channel/#{CGI.escape(this_quote[:irc_chan])}" title="see only this channel's quotes">#{this_quote[:irc_chan]}</a>
+          %a(href='/id/#{this_quote[:id]}#{o_value}' title='permanent link to this quote') #
+      From <a href="/channel/#{CGI.escape(this_quote[:irc_chan])}#{o_value}" title="see only this channel's quotes">#{this_quote[:irc_chan]}</a>
