@@ -1,6 +1,6 @@
 body {
   margin: 2em;
-  font-size: smaller;
+  font-size: 11px;
 }
 
 a {
@@ -19,7 +19,7 @@ div.header {
 div.header p {
   padding: .5em;
   font-weight: bold;
-  font-family:  "Courier New", Courier, monospace;
+  font-family:  "Menlo","Consolas" monospace;
 }
 
 div.header p a {
@@ -33,7 +33,7 @@ div.quote {
 
 div.quote p {
   padding: .5em;
-  font-family:  "Courier New", Courier, monospace;
+  font-family:  "Menlo","Consolas" monospace;
 }
 
 div.quote p a {
@@ -47,7 +47,7 @@ div.footer {
 
 div.footer p {
   padding: .5em;
-  font-family:  "Courier New", Courier, monospace;
+  font-family:  "Menlo","Consolas" monospace;
 }
 
 .plink {
