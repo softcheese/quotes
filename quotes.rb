@@ -9,30 +9,31 @@ class Quote < Sequel::Model ; end
 class OffensiveQuote < Sequel::Model(:quotes_o) ; end
 
 before do
+  QuoteType = Quote
   request.path_info.gsub!(/\/o$/) do
-    Quote = OffensiveQuote
+    QuoteType = OffensiveQuote
     @o = true
     "/"
   end
 end
 
 get '/' do
-  @quotes = Quote.reverse_order(:id)
+  @quotes = QuoteType.reverse_order(:id)
   haml :index
 end
 
 get '/id/:id/?' do
-  @quotes = Quote.filter(:id => params[:id]).all
+  @quotes = QuoteType.filter(:id => params[:id]).all
   haml :index
 end
 
 get '/channel/:irc_chan/?' do
-  @quotes = Quote.filter(:irc_chan => params[:irc_chan]).all
+  @quotes = QuoteType.filter(:irc_chan => params[:irc_chan]).all
   haml :index
 end
 
 get '/by/:attrib/?' do
-  @quotes = Quote.filter(:attrib => params[:attrib]).all
+  @quotes = QuoteType.filter(:attrib => params[:attrib]).all
   haml :index
 end
 
