@@ -1,0 +1,19 @@
+<%= haml '= partial "header"' %>
+<form name="new-quote" id="new-quote" method="post" action="/create">
+  <input type="hidden" name="_method" value="put">
+  <div>
+    <label for="quote">Quote:</label><br/>
+    <textarea name="quote" id="quote"></textarea>
+  </div>
+  <div>
+    <label for="attrib">Speaker:</label><br/>
+    <input name="attrib" id="attrib" />
+  </div>
+  <div>
+    <label for="context">Context:</label><br/>
+    <input name="context" id="context" />
+  </div>
+  <div>
+    <input type="submit" />
+  </div>
+</form>

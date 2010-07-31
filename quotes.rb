@@ -39,7 +39,19 @@ end
 
 get '/submit' do
   @action = 'submit'
-  haml :submit
+  erb :submit
+end
+
+put '/create' do
+  @quote = Quote.create({ 
+    :quote => params[:quote], 
+    :attrib => params[:attrib], 
+    :context => params[:context],
+    :date => Time.now.to_i,
+    :irc => 0
+    })
+  @quote.save
+  redirect '/'
 end
 
 helpers do
