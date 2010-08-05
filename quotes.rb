@@ -1,6 +1,5 @@
 require 'sinatra'
 require 'sequel'
-require 'cgi'
 
 configure { DB = Sequel.connect(ENV['DATABASE_URL'] || 'sqlite://db/quotes.db') } 
 
@@ -24,12 +23,12 @@ get '/id/:id/?' do
 end
 
 get '/channel/:irc_chan/?' do
-  @quotes = QuoteType.filter(:irc_chan => CGI.unescape(params[:irc_chan])).all
+  @quotes = QuoteType.filter(:irc_chan => params[:irc_chan]).all
   erb :index
 end
 
 get '/by/:attrib/?' do
-  @quotes = QuoteType.filter(:attrib => CGI.unescape(params[:attrib])).all
+  @quotes = QuoteType.filter(:attrib => params[:attrib]).all
   erb :index
 end
 
@@ -62,7 +61,7 @@ helpers do
     elsif object = options.delete(:object)
       partial name, options.merge(:locals => {item_name => object, counter_name => nil})
     else
-      haml "_#{name}".to_sym, options.merge(:layout => false)
+      erb "_#{name}".to_sym, options.merge(:layout => false)
     end
   end
 
@@ -71,7 +70,7 @@ helpers do
   end
 
   def html_escape(text)
-    Haml::Helpers.html_escape(text)
+    ERB::Util.html_escape(text)
   end
   
   def o_value ; @o ? "/o" : "" ; end

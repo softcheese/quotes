@@ -1,0 +1,36 @@
+<div class="quote">
+  <p class="body">
+    <%= nl2br(html_escape(this_quote[:quote]))%>
+  </p>
+  <p class ="meta">
+    <% if this_quote[:irc] == 0 %>
+      <% if this_quote[:context] != nil %>
+        <% if !@r_id %>
+          <span class="plink">
+            <a href="/id/<%= this_quote[:id] %><%= o_value %>" title="permanent link to this quote">#</a>
+          </span>
+        <% end %>
+        <% if this_quote[:attrib] != nil %>
+          <a href="/by/<%= ERB::Util.url_encode(this_quote[:attrib]) %><%= o_value %>" title="see only this person's quotes")><%= this_quote[:attrib] + ',' %></a>
+        <%= this_quote[:context] + '.' %>
+        <% end %>
+      <% else %>
+        <% if !@r_id %>
+          <span class="plink">
+            <a href="/id/<%= this_quote[:id] %><%= o_value %>" title="permanent link to this quote">#</a>
+          </span>
+        <% end %>
+        <% if this_quote[:attrib] != nil %>
+          <a href="/by/<%= ERB::Util.url_encode(this_quote[:attrib]) %>" title="see only this person's quotes")><%= this_quote[:attrib] + ',' %></a>
+        <% end %>
+      <% end %>
+    <% else %>
+      <% if !@r_id %>
+        <span class="plink">
+          <a href="/id/<%= this_quote[:id] %><%= o_value %>" title="permanent link to this quote">#</a>
+        </span>
+      <% end %>
+      From <a href="/channel/<%= ERB::Util.url_encode(this_quote[:irc_chan]) %><%= o_value %>" title="see only this channel's quotes"><%= this_quote[:irc_chan] %></a>
+    <% end %>
+  </p>
+</div>

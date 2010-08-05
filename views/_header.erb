@@ -1,0 +1,16 @@
+<div class="header">
+  <p>
+    <% if @action == 'submit' %>
+      <span class="submit">
+        [<a href="/">home</a>]
+      </span>
+      submit a quote
+      </span>
+    <% else %>
+      <span class="submit">
+        [<a href="/submit<%= o_value %>">submit</a>]
+      </span>
+      <a href="/<%= o_value %>")>quotes database <%= @o ? '(offensive)' : nil %></a>
+    <% end %>
+  </p>
+</div>

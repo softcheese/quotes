@@ -11,12 +11,12 @@ a:hover { text-decoration: underline; }
 div#page { max-width: 650px; min-width: 465px; margin: 0 auto;}
 
 div.header { background-color: #ccc; }
-div.header p { font-weight: bold; padding: .5em; }
+div.header p { font-weight: bold; padding: 5px 10px; }
 div.header p a { color: #00c; }
 div.header span.submit { float: right; }
 
 div.quote { background-color: #cf9; }
-div.quote p { padding: .5em; }
+div.quote p { padding: 10px; }
 div.quote p.body { font-family:  "Menlo", "Consolas", "Inconsolata", "DejaVu Sans Mono", monospace; }
 div.quote p a { color: #000; }
 div.quote p.meta { font-weight: bold; }
@@ -35,3 +35,4 @@ div.alert {
 
 label { font-weight: bold; }
 input[type=text] { width: 250px; }
+textarea { max-width: 650px; min-width: 435px; }
