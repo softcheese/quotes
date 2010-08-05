@@ -1,19 +1,37 @@
 <%= haml '= partial "header"' %>
-<form name="new-quote" id="new-quote" method="post" action="/create">
-  <input type="hidden" name="_method" value="put">
+<form name="new-quote" id="new-quote" method="post" action="/create/<%= 'o' if @o %>">
+  <input type="hidden" name="_method" value="put" />
   <div>
-    <label for="quote">Quote:</label><br/>
-    <textarea name="quote" id="quote"></textarea>
+    <label for="quote">Quote text: (no html. for IRC, format lines for standard 80-column display. no timestamps, extra spaces, or client fanciness)</label><br />
+    <textarea rows="6" cols="80" name="quote" id="quote"> </textarea>
   </div>
+
   <div>
-    <label for="attrib">Speaker:</label><br/>
-    <input name="attrib" id="attrib" />
+    <label for="irc">Is it from IRC?</label>
+    <input type="radio" name="irc" value="1" /> Yes
+    <input type="radio" name="irc" value="0" /> No
   </div>
-  <div>
-    <label for="context">Context:</label><br/>
-    <input name="context" id="context" />
-  </div>
-  <div>
-    <input type="submit" />
+
+  <label for="">Who said it? (full names, nicely capitalized, please. leave blank if a group quote or from IRC)</label>
+  <input type="text" name="attrib" id="attrib"/>
+
+  <br /><br />What was the context of the quote? (without beginning or ending punctuation. leave blank if from IRC)<br />
+  <input type="text" name="context" id="context" />
+
+  <br /><br />If from IRC, what channel? (include the pound sign)<br />
+  <input type="text" name="irc_chan" id="irc_chan" />
+
+  <% if @o %>
+  <br /><br />
+  This quote is being added as an offensive quote. If this is not what you want, click <a href="/submit">here</a>.
+  <% else %>
+  <br /><br />
+  If this is an offensive quote, click <a href="/submit/o">here</a>.
+  <% end %>
+
+  </p>
+
+  <input type="submit" name="submit" value="Submit quote" />
+  </form>
   </div>
 </form>

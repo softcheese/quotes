@@ -1,5 +1,4 @@
 require 'sinatra'
-require 'haml'
 require 'sequel'
 require 'cgi'
 
@@ -28,6 +27,7 @@ get '/id/:id/?' do
 end
 
 get '/channel/:irc_chan/?' do
+  channel = 
   @quotes = QuoteType.filter(:irc_chan => params[:irc_chan]).all
   haml :index
 end
@@ -37,18 +37,19 @@ get '/by/:attrib/?' do
   haml :index
 end
 
-get '/submit' do
+get '/submit/?' do
   @action = 'submit'
   erb :submit
 end
 
-put '/create' do
+put '/create/?' do
   @quote = Quote.create({ 
     :quote => params[:quote], 
     :attrib => params[:attrib], 
     :context => params[:context],
-    :date => Time.now.to_i,
-    :irc => 0
+    :irc => params[:irc].to_i,
+    :irc_chan => params[:irc_chan],
+    :date => Time.now.to_i
     })
   @quote.save
   redirect '/'
