@@ -1,5 +1,5 @@
 <%= partial 'header' %>
-<form name="new-quote" id="new-quote" method="post" action="/create/<%= 'o' if @o %>">
+<form name="new-quote" id="new-quote" method="post" action="/create<%= o_value %>">
 <input type="hidden" name="_method" value="put" />
 
 <div class="field alert">

@@ -38,7 +38,7 @@ get '/submit/?' do
 end
 
 put '/create/?' do
-  @quote = Quote.create({ 
+  @quote = QuoteType.create({ 
     :quote => params[:quote], 
     :attrib => params[:attrib], 
     :context => params[:context],
@@ -47,7 +47,7 @@ put '/create/?' do
     :date => Time.now.to_i
     })
   @quote.save
-  redirect '/'
+  redirect @o ? '/o' : '/'
 end
 
 helpers do
