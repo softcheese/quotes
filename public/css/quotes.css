@@ -1,5 +1,6 @@
 body {
   margin: 2em;
+  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "DejaVu Sans", sans-serif;
   font-size: 11px;
 }
 
@@ -19,7 +20,7 @@ div.header {
 div.header p {
   padding: .5em;
   font-weight: bold;
-  font-family:  "Menlo","Consolas" monospace;
+  font-family:  "Menlo", "Consolas","DejaVu Sans Mono", monospace;
 }
 
 div.header p a {
@@ -33,7 +34,7 @@ div.quote {
 
 div.quote p {
   padding: .5em;
-  font-family:  "Menlo","Consolas" monospace;
+  font-family:  "Menlo", "Consolas", "DejaVu Sans Mono", monospace;
 }
 
 div.quote p a {
@@ -47,9 +48,25 @@ div.footer {
 
 div.footer p {
   padding: .5em;
-  font-family:  "Menlo","Consolas" monospace;
+  font-family:  "Menlo", "Consolas", "DejaVu Sans Mono", monospace;
 }
 
 .plink {
   float: right;
 }
+
+div.field {
+  width: 73%;
+  background-color: #cf9;
+  line-height: 24px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+div.change-quote-type {
+  background-color: #fcc;
+  font-weight: bold;
+}
+
+label { font-weight: bold; }
+input[type=text] { width: 250px;}
