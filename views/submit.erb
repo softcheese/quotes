@@ -1,4 +1,4 @@
-<%= haml '= partial "header"' %>
+<% partial 'header' %>
 <form name="new-quote" id="new-quote" method="post" action="/create/<%= 'o' if @o %>">
 <input type="hidden" name="_method" value="put" />
 
