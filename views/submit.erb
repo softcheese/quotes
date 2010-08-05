@@ -1,42 +1,40 @@
 <%= haml '= partial "header"' %>
 <form name="new-quote" id="new-quote" method="post" action="/create/<%= 'o' if @o %>">
-  <input type="hidden" name="_method" value="put" />
-  
-  <div class="field alert">
-  <% if @o %>
-    This quote is being added as an offensive quote. If this is not what you want, <a href="/submit">click here</a>.
-  <% else %>
-    If this is an offensive quote, <a href="/submit/o">click here</a>.
-  <% end %>
-  </div>
-  
-  <div class="field">
-    <label for="quote">Quote text:</label> (no html; for IRC, format lines for standard 80-column display. no timestamps, extra spaces, or client fanciness)<br />
-    <textarea rows="8" cols="60" name="quote" id="quote"> </textarea>
-  </div>
+<input type="hidden" name="_method" value="put" />
 
-  <div class="field">
-    <label for="irc">Is it from IRC?</label>
-    <input type="radio" name="irc" value="1" /> Yes
-    <input type="radio" name="irc" value="0" /> No
-  </div>
+<div class="field alert">
+<% if @o %>
+  This quote is being added as an offensive quote. If this is not what you want, <a href="/submit">click here</a>.
+<% else %>
+  If this is an offensive quote, <a href="/submit/o">click here</a>.
+<% end %>
+</div>
 
-  <div class="field">
-    <label for="">Who said it?</label> (full names, nicely capitalized, please. leave blank if a group quote or from IRC)<br/>
-    <input type="text" name="attrib" id="attrib"/>
-  </div>
-  
-  <div class="field">
-    <label for="context">What was the context of the quote?</label> (without beginning or ending punctuation. leave blank if from IRC)<br />
-    <input type="text" name="context" id="context" />
-  </div>
+<div class="field">
+  <label for="quote">Quote text:</label> (no html; for IRC, format lines for standard 80-column display. no timestamps, extra spaces, or client fanciness)<br />
+  <textarea rows="8" cols="60" name="quote" id="quote"> </textarea>
+</div>
 
-  <div class="field">
-    <label for="irc_chan">If from IRC, what channel?</label> (include the pound sign)<br />
-    <input type="text" name="irc_chan" id="irc_chan" />
-  </div>
+<div class="field">
+  <label for="irc">Is it from IRC?</label>
+  <input type="radio" name="irc" value="1" /> Yes
+  <input type="radio" name="irc" value="0" /> No
+</div>
 
-  <input type="submit" name="submit" value="Submit quote" />
-  </form>
-  </div>
+<div class="field">
+  <label for="">Who said it?</label> (full names, nicely capitalized, please. leave blank if a group quote or from IRC)<br/>
+  <input type="text" name="attrib" id="attrib"/>
+</div>
+
+<div class="field">
+  <label for="context">What was the context of the quote?</label> (without beginning or ending punctuation. leave blank if from IRC)<br />
+  <input type="text" name="context" id="context" />
+</div>
+
+<div class="field">
+  <label for="irc_chan">If from IRC, what channel?</label> (include the pound sign)<br />
+  <input type="text" name="irc_chan" id="irc_chan" />
+</div>
+
+<input type="submit" name="submit" value="Submit quote" />
 </form>
