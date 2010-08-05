@@ -12,29 +12,29 @@ before do
   request.path_info.gsub!(/\/o$/) do
     QuoteType = OffensiveQuote
     @o = true
-    "/"
+    ""
   end
+  request.path_info = "/" if request.path_info.empty?
 end
 
 get '/' do
   @quotes = QuoteType.reverse_order(:id)
-  haml :index
+  erb :index
 end
 
 get '/id/:id/?' do
   @quotes = QuoteType.filter(:id => params[:id]).all
-  haml :index
+  erb :index
 end
 
 get '/channel/:irc_chan/?' do
-  channel = 
-  @quotes = QuoteType.filter(:irc_chan => params[:irc_chan]).all
-  haml :index
+  @quotes = QuoteType.filter(:irc_chan => CGI.unescape(params[:irc_chan])).all
+  erb :index
 end
 
 get '/by/:attrib/?' do
-  @quotes = QuoteType.filter(:attrib => params[:attrib]).all
-  haml :index
+  @quotes = QuoteType.filter(:attrib => CGI.unescape(params[:attrib])).all
+  erb :index
 end
 
 get '/submit/?' do

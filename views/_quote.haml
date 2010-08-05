@@ -1,8 +1,7 @@
 %div.quote
-  %p
+  %p{ :class => "body" }
     = nl2br(html_escape(this_quote[:quote]))
-    %br/
-    %br/
+  %p{ :class => "meta" }
     - if this_quote[:irc] == 0
       - if this_quote[:context] != nil
         - if !@r_id
