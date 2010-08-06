@@ -73,6 +73,6 @@ helpers do
     ERB::Util.html_escape(text)
   end
   
-  def o_value ; @o ? "/o" : "" ; end
+  def o_value ; @o ? "/o" : "/" ; end
 end
   
