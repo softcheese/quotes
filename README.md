@@ -6,20 +6,28 @@ Install and run
 
 1. Clone the Repository
 
+
     git clone git://github.com/uritu/quotes.git
     cd quotes
+    
 
 2. Install dependencies
 
+
     bundle install
+
 
 3. Migrate the database 
 
+
     sequel -m db/migrate/ sqlite://db/quotes.db
+
   
 4. Start the server
 
+
     ruby quotes.rb
+
   
 
 Deploying to Heroku
