@@ -18,7 +18,7 @@ Install and run
 
 3. Migrate the database 
 
-        sequel -m db/migrate/ sqlite://db/quotes.db
+        rake db:migrate
   
 4. Start the server
 
@@ -34,6 +34,7 @@ Quotes Database is Heroku-ready, which means that this:
     heroku create
     # ...
     git push heroku master
+    heroku rake db:migrate
   
 will create and launch Quotes DB as a fresh Heroku app.
 
@@ -52,3 +53,20 @@ the offensive quote submission page.
 By adding a trailing '/o' to the end of the URL, you can 
 see the offensive quotes. This works for all URLs,
 including '/submit/o', '/create/o', and '/id/:id/o'.
+
+
+Contributing
+-----------------------------------------------------------
+There are several ways you can contribute, including:
+
+1. Submitting bug reports
+
+    * Look through issues to see if the bug has already
+      been submitted.
+    * If not, open a new issue describing the bug
+
+2. Bugfixes or feature additions
+
+    * Fork the repository
+    * Commit your changes
+    * Send a pull request
