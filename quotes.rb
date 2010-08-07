@@ -1,7 +1,10 @@
 require 'sinatra'
 require 'sequel'
 
-configure { DB = Sequel.connect(ENV['DATABASE_URL'] || 'sqlite://db/quotes.db') }
+configure do
+  DB_URI = ENV['DATABASE_URL'] || 'sqlite://db/quotes.db'
+  Sequel.connect DB_URI
+end
 
 class Quote < Sequel::Model ; end
 class OffensiveQuote < Sequel::Model(:quotes_o) ; end
