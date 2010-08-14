@@ -30,7 +30,8 @@
           <a href="/id/<%= this_quote[:id] %><%= o_value %>" title="permanent link to this quote">#</a>
         </span>
       <% end %>
-      From <a href="/channel/<%= ERB::Util.url_encode(this_quote[:irc_chan]) %><%= o_value %>" title="see only this channel's quotes"><%= this_quote[:irc_chan] %></a>
+      <%= this_quote[:attrib].to_s.empty? ? "From" : "#{ this_quote[:attrib] }, from"%>    
+      <a href="/channel/<%= ERB::Util.url_encode(this_quote[:irc_chan]) %><%= o_value %>" title="see only this channel's quotes"><%= this_quote[:irc_chan] %></a><%= ", #{ this_quote[:context] unless this_quote[:context].nil? }."%>
     <% end %>
   </p>
 </div>
