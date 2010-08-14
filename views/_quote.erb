@@ -31,7 +31,7 @@
         </span>
       <% end %>
       <%= this_quote[:attrib].to_s.empty? ? "From" : "#{ this_quote[:attrib] }, from"%>    
-      <a href="/channel/<%= ERB::Util.url_encode(this_quote[:irc_chan]) %><%= o_value %>" title="see only this channel's quotes"><%= this_quote[:irc_chan] %></a><%= ", #{ this_quote[:context] unless this_quote[:context].nil? }."%>
+      <a href="/channel/<%= ERB::Util.url_encode(this_quote[:irc_chan]) %><%= o_value %>" title="see only this channel's quotes"><%= this_quote[:irc_chan] %></a><%= this_quote[:context].to_s.empty? ? "" : ", #{ this_quote[:context] }."%>
     <% end %>
   </p>
 </div>
