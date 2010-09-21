@@ -42,7 +42,7 @@ get '/submit/?' do
 end
 
 put '/create/?' do
-  redirect @o ? '/o' : '/' if params[:spam_question].to_i != 25
+  redirect @o ? '/o' : '/' if params[:spam_question].to_i != 100
   @quote = QuoteType.create({
     :quote => params[:quote],
     :attrib => params[:attrib],
