@@ -1,3 +1,4 @@
+require 'rubygems'
 require 'sinatra'
 require 'sequel'
 
@@ -41,9 +42,10 @@ get '/submit/?' do
 end
 
 put '/create/?' do
-  @quote = QuoteType.create({ 
-    :quote => params[:quote], 
-    :attrib => params[:attrib], 
+  redirect @o ? '/o' : '/' if params[:spam_question].to_i != 25
+  @quote = QuoteType.create({
+    :quote => params[:quote],
+    :attrib => params[:attrib],
     :context => params[:context],
     :irc => params[:irc].to_i,
     :irc_chan => params[:irc_chan],
@@ -75,7 +77,11 @@ helpers do
   def html_escape(text)
     ERB::Util.html_escape(text)
   end
-  
+
   def o_value ; @o ? "/o" : "/" ; end
+
+  def spam_question
+    "What is four times twenty-five?"
+  end
+
 end
-  
