@@ -11,6 +11,7 @@ class Quote < Sequel::Model ; end
 class OffensiveQuote < Sequel::Model(:quotes_o) ; end
 
 before do
+  response.headers["Cache-Control"] = "public, max-age=3600"
   request.path_info.gsub!(/\/o$/) { @o = true; "" }
   request.path_info = "/" if request.path_info.empty?
   QuoteType = @o ? OffensiveQuote : Quote
