@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'sinatra'
 require 'sequel'
+require 'uri'
 
 configure do
   DB_URI = ENV['DATABASE_URL'] || 'sqlite://db/quotes.db'
@@ -28,7 +29,7 @@ get '/id/:id/?' do
 end
 
 get '/channel/:irc_chan/?' do
-  @quotes = QuoteType.filter(:irc_chan => params[:irc_chan]).all
+  @quotes = QuoteType.filter(:irc_chan => '#' + params[:irc_chan]).all + QuoteType.filter(:irc_chan => params[:irc_chan]).all
   erb :index
 end
 
