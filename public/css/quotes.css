@@ -1,38 +1,43 @@
 body {
-  margin: 2em;
+  color: #7b5229;
   font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "DejaVu Sans", sans-serif;
   font-size: 11px;
   line-height: 14px;
-}
+  margin: 2em; }
 
 a { text-decoration: none; }
 a:hover { text-decoration: underline; }
+a img { border: 0; }
 
 div#page { max-width: 650px; min-width: 465px; margin: 0 auto;}
 
-div.header { background-color: #ccc; }
-div.header p { font-weight: bold; padding: 5px 10px; }
-div.header p a { color: #00c; }
-div.header span.submit { float: right; }
+div.header, div.quote, div.field { -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; }
 
-div.quote { background-color: #cf9; }
-div.quote p { padding: 10px; }
-div.quote p.body { font-family:  "Menlo", "Consolas", "Inconsolata", "DejaVu Sans Mono", monospace; }
-div.quote p a { color: #000; }
+div.header { background-color: #f2f2f2; border: 1px solid #ddd; margin-bottom: 11px; }
+div.header p { font-weight: bold; line-height: 1; margin: 0; padding: 10px; }
+div.header p a { color: #a57331; }
+div.header span.submit { display: block; float: right; position: relative; top: 7px;}
+div.header span.offensive { display: inline-block; font-size: 27px; left: 11px; line-height: 1; position: relative; top: -4px;}
+
+div.quote, div.field { background-color: #f9f2c8; border: 1px solid #f7ce7b; margin-bottom: 11px; }
+div.quote p, div.field p { color: #a57331; padding: 10px; }
+div.quote p.body { font-family: "Monaco", "Consolas", "Inconsolata", "DejaVu Sans Mono", monospace; }
+div.quote p a, div.field p a { color: #7b5229; }
 div.quote p.meta { font-weight: bold; }
 div.quote .plink { float: right; }
 
 div.field {
-  background-color: #cf9;
   margin-bottom: 10px;
-  padding: 10px;
-}
+  padding: 10px; }
 
 div.alert {
-  background-color: #fcc;
-  font-weight: bold;
-}
+  background-color: #a57331;
+  border-color: #7b5229;
+  color: #f9f2c8;
+  font-weight: bold; }
+div.alert a { color: #f7ce7b; }
 
 label { font-weight: bold; }
 input[type=text] { width: 250px; }
+input[type=submit] { margin-bottom: 10px; }
 textarea { max-width: 650px; min-width: 435px; }
