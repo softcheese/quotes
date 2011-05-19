@@ -1,2 +1,5 @@
-require 'quotes'
-run Sinatra::Application
+require 'bundler'
+Bundler.require
+
+require './quotes'
+run Quotes::App

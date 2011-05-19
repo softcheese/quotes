@@ -1,4 +1,9 @@
 source "http://rubygems.org"
 
-gem "sinatra", "= 1.0"
+gem "sinatra"
 gem "sequel"
+
+group :development, :test do
+  gem "sqlite3"
+  gem "shotgun"
+end
