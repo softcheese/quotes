@@ -73,6 +73,6 @@ There are several ways you can contribute, including:
 
 Thanks
 -----------------------------------------------------------
-* @uritu, for being awesome and writing this
+* @[uritu](https://github.com/uritu), for being awesome and writing this
 * #lobby on irc.softcheese.net for providing daily quotes
   fodder.
