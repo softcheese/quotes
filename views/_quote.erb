@@ -30,7 +30,7 @@
           <a href="/id/<%= this_quote[:id] %><%= o_value %>" title="permanent link to this quote">#</a>
         </span>
       <% end %>
-      <%= this_quote[:attrib].to_s.empty? ? "From" : "#{ this_quote[:attrib] }, from"%>
+      <%= this_quote[:attrib].to_s.empty? ? "From" : "<a href=\"/by/#{ERB::Util.url_encode(this_quote[:attrib])}\">#{ this_quote[:attrib] }</a>, from"%>
       <a href="/channel/<%= this_quote[:irc_chan].gsub('#','') %><%= o_value %>" title="see only this channel's quotes"><%= this_quote[:irc_chan] %></a><%= this_quote[:context].to_s.empty? ? "" : ", #{ this_quote[:context] }."%>
     <% end %>
   </p>
