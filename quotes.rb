@@ -7,14 +7,14 @@ module Quotes
       Sequel.connect DB_URI
     end
 
-    class Quote < Sequel::Model ; end
+    class Quote < Sequel::Model; end
     class OffensiveQuote < Sequel::Model(:quotes_o) ; end
 
     before do
       response.headers["Cache-Control"] = "public, max-age=300"
-      request.path_info.gsub!(/\/o$/) { @o = true; "" }
+      request.path_info.gsub!(/\/o$/) { @offensive = true; "" }
       request.path_info = "/" if request.path_info.empty?
-      QuoteType = @o ? OffensiveQuote : Quote
+      QuoteType = @offensive ? OffensiveQuote : Quote
     end
 
     get '/' do
@@ -44,7 +44,7 @@ module Quotes
 
     put '/create/?' do
       response.headers["Cache-Control"] = "no-cache"
-      redirect @o ? '/o' : '/' if params[:spam_question].to_i != 100
+      redirect @offensive ? '/o' : '/' if params[:spam_question].to_i != 100
       @quote = QuoteType.create({
         :quote => params[:quote],
         :attrib => params[:attrib],
@@ -54,7 +54,7 @@ module Quotes
         :date => Time.now.to_i
         })
       @quote.save
-      redirect @o ? '/o' : '/'
+      redirect @offensive ? '/o' : '/'
     end
 
     helpers do
@@ -80,7 +80,9 @@ module Quotes
         ERB::Util.html_escape(text)
       end
 
-      def o_value ; @o ? "/o" : "/" ; end
+      def o_value
+        @offensive ? "/o" : "/"
+      end
 
       def spam_question
         "What is four times twenty-five?"

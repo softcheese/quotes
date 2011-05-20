@@ -1,0 +1,15 @@
+<%
+  has_speaker = !quote[:attrib].to_s.empty?
+  has_context = !quote[:context].to_s.empty?
+  is_irc = (quote[:irc] == 1)
+%>
+
+<% if has_speaker %>
+  <a href="/by/<%= ERB::Util.url_encode quote[:attrib] %><%= o_value %>" title="see more of this person's quotes"><%= quote[:attrib] %></a><%= ',' if is_irc or has_context %>
+<% end %>
+
+<% if is_irc %>
+  <%= has_speaker ? 'f' : 'F'  %>rom <a href="/channel/<%= ERB::Util.url_encode quote[:irc_chan].gsub('#','') %>" title="see more quotes from this channel"><%= quote[:irc_chan] %></a><%= ',' if has_context %>
+<% end %>
+
+<%= quote[:context] if has_context %>

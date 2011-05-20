@@ -1,37 +1,13 @@
 <div class="quote">
   <p class="body">
-    <%= nl2br(html_escape(this_quote[:quote]))%>
+    <%= nl2br(html_escape(quote[:quote]))%>
   </p>
+
   <p class ="meta">
-    <% if this_quote[:irc] == 0 %>
-      <% if !this_quote[:context].to_s.empty? %>
-        <% if !@r_id %>
-          <span class="plink">
-            <a href="/id/<%= this_quote[:id] %><%= o_value %>" title="permanent link to this quote">#</a>
-          </span>
-        <% end %>
-        <% if !this_quote[:attrib].to_s.empty? %>
-          <a href="/by/<%= ERB::Util.url_encode(this_quote[:attrib]) %><%= o_value %>" title="see only this person's quotes")><%= this_quote[:attrib] + ',' %></a>
-        <%= this_quote[:context] + '.' %>
-        <% end %>
-      <% else %>
-        <% if !@r_id %>
-          <span class="plink">
-            <a href="/id/<%= this_quote[:id] %><%= o_value %>" title="permanent link to this quote">#</a>
-          </span>
-        <% end %>
-        <% if !this_quote[:attrib].to_s.empty? %>
-          <a href="/by/<%= ERB::Util.url_encode(this_quote[:attrib]) %>" title="see only this person's quotes")><%= this_quote[:attrib] + ',' %></a>
-        <% end %>
-      <% end %>
-    <% else %>
-      <% if !@r_id %>
-        <span class="plink">
-          <a href="/id/<%= this_quote[:id] %><%= o_value %>" title="permanent link to this quote">#</a>
-        </span>
-      <% end %>
-      <%= this_quote[:attrib].to_s.empty? ? "From" : "<a href=\"/by/#{ERB::Util.url_encode(this_quote[:attrib])}\">#{ this_quote[:attrib] }</a>, from"%>
-      <a href="/channel/<%= this_quote[:irc_chan].gsub('#','') %><%= o_value %>" title="see only this channel's quotes"><%= this_quote[:irc_chan] %></a><%= this_quote[:context].to_s.empty? ? "" : ", #{ this_quote[:context] }."%>
-    <% end %>
+    <span class="plink">
+      <a href="/id/<%= quote[:id] %><%= o_value %>" title="permanent link to this quote">#</a>
+    </span>
+
+    <%= partial 'attribution', :locals => { :quote => quote } %>
   </p>
 </div>
