@@ -20,6 +20,11 @@ module Quotes
       end
     end
 
+
+    get %r{/submit(.*?)} do
+      erb :submit
+    end
+
     get '/?:o?' do
       @quotes = @quote_type.reverse_order(:id)
       erb :index
@@ -38,11 +43,6 @@ module Quotes
     get '/by/:attrib/?:o?' do
       @quotes = @quote_type.filter(:attrib => params[:attrib]).all
       erb :index
-    end
-
-    get '/submit/?:o?' do
-      @action = 'submit'
-      erb :submit
     end
 
     put '/create/?:o?' do
