@@ -12,40 +12,43 @@ module Quotes
 
     before do
       response.headers["Cache-Control"] = "public, max-age=300"
-      request.path_info.gsub!(/\/o$/) { @offensive = true; "" }
-      request.path_info = "/" if request.path_info.empty?
-      QuoteType = @offensive ? OffensiveQuote : Quote
+      @quote_type = if request.path_info =~ /\/o$/
+        @offensive = true
+        OffensiveQuote
+      else
+        Quote
+      end
     end
 
-    get '/' do
-      @quotes = QuoteType.reverse_order(:id)
+    get '/?:o?' do
+      @quotes = @quote_type.reverse_order(:id)
       erb :index
     end
 
-    get '/id/:id/?' do
-      @quotes = QuoteType.filter(:id => params[:id]).all
+    get '/id/:id/?:o?' do
+      @quotes = @quote_type.filter(:id => params[:id]).all
       erb :index
     end
 
-    get '/channel/:irc_chan/?' do
-      @quotes = QuoteType.filter(:irc_chan => '#' + params[:irc_chan]).all + QuoteType.filter(:irc_chan => params[:irc_chan]).all
+    get '/channel/:irc_chan/?:o?' do
+      @quotes = @quote_type.filter(:irc_chan => '#' + params[:irc_chan]).all + @quote_type.filter(:irc_chan => params[:irc_chan]).all
       erb :index
     end
 
-    get '/by/:attrib/?' do
-      @quotes = QuoteType.filter(:attrib => params[:attrib]).all
+    get '/by/:attrib/?:o?' do
+      @quotes = @quote_type.filter(:attrib => params[:attrib]).all
       erb :index
     end
 
-    get '/submit/?' do
+    get '/submit/?:o?' do
       @action = 'submit'
       erb :submit
     end
 
-    put '/create/?' do
+    put '/create/?:o?' do
       response.headers["Cache-Control"] = "no-cache"
       redirect @offensive ? '/o' : '/' if params[:spam_question].to_i != 100
-      @quote = QuoteType.create({
+      @quote = @quote_type.create({
         :quote => params[:quote],
         :attrib => params[:attrib],
         :context => params[:context],
