@@ -12,7 +12,7 @@ module Quotes
 
     before do
       response.headers["Cache-Control"] = "public, max-age=300"
-      @quote_type = if request.path_info =~ /\/o$/
+      @quote_type = if request.path_info =~ /\/o(\/)?$/
         @offensive = true
         OffensiveQuote
       else
@@ -25,27 +25,27 @@ module Quotes
       erb :submit
     end
 
-    get '/?:o?' do
+    get '/?:o?/?' do
       @quotes = @quote_type.reverse_order(:id)
       erb :index
     end
 
-    get '/id/:id/?:o?' do
+    get '/id/:id/?:o?/?' do
       @quotes = @quote_type.filter(:id => params[:id]).all
       erb :index
     end
 
-    get '/channel/:irc_chan/?:o?' do
+    get '/channel/:irc_chan/?:o?/?' do
       @quotes = @quote_type.filter(:irc_chan => '#' + params[:irc_chan]).all + @quote_type.filter(:irc_chan => params[:irc_chan]).all
       erb :index
     end
 
-    get '/by/:attrib/?:o?' do
+    get '/by/:attrib/?:o?/?' do
       @quotes = @quote_type.filter(:attrib => params[:attrib]).all
       erb :index
     end
 
-    put '/create/?:o?' do
+    put '/create/?:o?/?' do
       response.headers["Cache-Control"] = "no-cache"
       redirect @offensive ? '/o' : '/' if params[:spam_question].to_i != 100
       @quote = @quote_type.create({
