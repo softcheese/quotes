@@ -41,7 +41,7 @@ module Quotes
     end
 
     get '/by/:attrib/?:o?/?' do
-      @quotes = @quote_type.filter(:attrib => params[:attrib]).all
+      @quotes = @quote_type.filter(:attrib.like("%#{params[:attrib]}%")).all
       erb :index
     end
 
@@ -73,6 +73,10 @@ module Quotes
         else
           erb "_#{name}".to_sym, options.merge(:layout => false)
         end
+      end
+
+      def speakers_list(speakers)
+        speakers.split(/,\s?((and|&),\s)?|\s?&\s?/)
       end
 
       def nl2br(text)

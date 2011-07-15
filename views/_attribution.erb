@@ -5,7 +5,16 @@
 %>
 
 <% if has_speaker %>
-  <a href="/by/<%= ERB::Util.url_encode quote[:attrib] %><%= o_value %>" title="see more of this person's quotes"><%= quote[:attrib] %></a><%= ',' if is_irc or has_context %>
+  <% (speakers = speakers_list(quote[:attrib])).each_with_index do |speaker, index| %>
+  <a href="/by/<%= ERB::Util.url_encode speaker %><%= o_value %>" title="see more of this person's quotes"><%= speaker %></a><%=
+ 	case index
+        when speakers.length-2 
+          minustwo = ', and ' if speakers.length > 2
+          minustwo = ' and ' if speakers.length <= 2
+        when speakers.length-1 then ''
+        else
+          ', '
+        end %><% end %><%= ',' if is_irc or has_context %>
 <% end %>
 
 <% if is_irc %>
