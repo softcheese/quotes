@@ -76,7 +76,7 @@ module Quotes
       end
 
       def speakers_list(speakers)
-        speakers.split(/,\s?((and|&)\s)?|\s?(&|and)\s?/)
+        speakers.split(/,?\s&\s|,?\sand\s|,\s?/)
       end
 
       def nl2br(text)
