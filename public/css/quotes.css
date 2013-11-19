@@ -9,7 +9,7 @@ a { text-decoration: none; }
 a:hover { text-decoration: underline; }
 a img { border: 0; }
 
-div#page { max-width: 650px; min-width: 465px; margin: 0 auto;}
+div#page { max-width: 650px; min-width: 300px; margin: 0 auto;}
 
 div.header, div.quote, div.field { -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; }
 
