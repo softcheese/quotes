@@ -1,0 +1,7 @@
+%nav.navbar
+  - if @action == 'submit'
+    <a href="#{  o_value }"><img src="/img/logo.gif" /></a>
+    %a.btn.btn-default.navbar-btn{ href: o_value } Home
+  - else
+    <a href="#{ o_value }")><img src="/img/logo.gif" />#{ @offensive ? '<span class="offensive">(offensive)</span>' : nil }</a>
+    %a.btn.btn-default.navbar-btn{ href: "/submit#{ o_value }" } Submit

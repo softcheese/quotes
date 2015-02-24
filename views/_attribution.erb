@@ -7,8 +7,8 @@
 <% if has_speaker %>
   <% (speakers = speakers_list(quote[:attrib])).each_with_index do |speaker, index| %>
   <a href="/by/<%= ERB::Util.url_encode speaker %><%= o_value %>" title="see more of this person's quotes"><%= speaker %></a><%=
- 	case index
-        when speakers.length-2 
+  case index
+        when speakers.length-2
           minustwo = ', and ' if speakers.length > 2
           minustwo = ' and ' if speakers.length <= 2
           minustwo
@@ -19,7 +19,8 @@
 <% end %>
 
 <% if is_irc %>
-  <%= has_speaker ? 'f' : 'F'  %>rom <a href="/channel/<%= ERB::Util.url_encode quote[:irc_chan].gsub('#','') %>" title="see more quotes from this channel"><%= quote[:irc_chan] %></a><%= ',' if has_context %>
+  <%= has_speaker ? 'f' : 'F'  %>rom
+  <a href="/channel/<%= ERB::Util.url_encode quote[:irc_chan].gsub('#','') %>" title="see more quotes from this channel"><%= quote[:irc_chan] %></a><%= ',' if has_context %>
 <% end %>
 
 <%= quote[:context] if has_context %>

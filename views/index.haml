@@ -1,0 +1,9 @@
+= partial "header"
+
+- @quotes.each do |quote|
+  = partial("quote", locals: { quote: quote })
+
+%hr
+%p
+  You made it to the bottom! Hooray!
+  %a{ href: "https://github.com/philtr/quotes" } Fork me on GitHub

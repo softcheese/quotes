@@ -16,11 +16,7 @@ Install and run
 
         bundle install
 
-3. Migrate the database
-
-        rake db:migrate
-
-4. Start the server
+3. Start the server
 
         ruby quotes.rb
 

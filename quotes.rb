@@ -1,9 +1,7 @@
-require 'uri'
-
 module Quotes
   class App < Sinatra::Application
+    DB_URI = ENV['DATABASE_URL'] || 'sqlite://db/quotes.db'
     configure do
-      DB_URI = ENV['DATABASE_URL'] || 'sqlite://db/quotes.db'
       Sequel.connect DB_URI
     end
 
@@ -27,7 +25,7 @@ module Quotes
 
     get '/?:o?/?' do
       @quotes = @quote_type.reverse_order(:id)
-      erb :index
+      haml :index
     end
 
     get '/id/:id/?:o?/?' do
@@ -45,7 +43,7 @@ module Quotes
       erb :index
     end
 
-    put '/create/?:o?/?' do
+    post '/create/?:o?/?' do
       response.headers["Cache-Control"] = "no-cache"
       redirect @offensive ? '/o' : '/' if params[:spam_question].to_i != 100
       @quote = @quote_type.create({
@@ -71,7 +69,7 @@ module Quotes
         elsif object = options.delete(:object)
           partial name, options.merge(:locals => {item_name => object, counter_name => nil})
         else
-          erb "_#{name}".to_sym, options.merge(:layout => false)
+          haml "_#{name}".to_sym, options.merge(:layout => false) rescue erb "_#{name}".to_sym, options.merge(:layout => false)
         end
       end
 
