@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-ruby "2.2.2"
+ruby "2.4.6"
 
 gem "pg"
 gem "sinatra"
