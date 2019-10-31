@@ -4,7 +4,7 @@ GEM
     daemons (1.2.2)
     eventmachine (1.0.7)
     pg (0.18.2)
-    rack (1.2.2)
+    rack (1.6.11)
     sequel (3.23.0)
     shotgun (0.9)
       rack (>= 1.0)
