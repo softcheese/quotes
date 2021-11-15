@@ -1,9 +1,6 @@
-require 'uri'
-
 module Quotes
   class App < Sinatra::Application
     configure do
-      DB_URI = ENV['DATABASE_URL'] || 'sqlite://db/quotes.db'
       Sequel.connect DB_URI
     end
 
@@ -31,17 +28,17 @@ module Quotes
     end
 
     get '/id/:id/?:o?/?' do
-      @quotes = @quote_type.filter(:id => params[:id]).all
+      @quotes = @quote_type.where(id: params[:id]).all
       erb :index
     end
 
     get '/channel/:irc_chan/?:o?/?' do
-      @quotes = @quote_type.filter(:irc_chan => '#' + params[:irc_chan]).all + @quote_type.filter(:irc_chan => params[:irc_chan]).all
+      @quotes = @quote_type.where(Sequel.like(:irc_chan, "%#{params[:irc_chan]}")).all
       erb :index
     end
 
     get '/by/:attrib/?:o?/?' do
-      @quotes = @quote_type.filter(:attrib.like("%#{params[:attrib]}%")).all
+      @quotes = @quote_type.where(Sequel[:attrib] =~ params[:attrib].to_s).all
       erb :index
     end
 
@@ -97,4 +94,3 @@ module Quotes
     end
   end
 end
-

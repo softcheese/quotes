@@ -1,5 +1,5 @@
 require 'bundler'
 Bundler.require
 
-require './quotes'
+require './lib/quotes'
 run Quotes::App
